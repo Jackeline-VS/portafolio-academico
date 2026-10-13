@@ -1,0 +1,42 @@
+PORTAFOLIO DE JACKELINE VIVANCO SOLANO
+Desarrollo de Aplicaciones Web · UNCP · 2026
+
+CÓMO ABRIRLO EN VISUAL STUDIO CODE
+1. Extrae TODO el archivo ZIP (clic derecho > Extraer todo).
+2. Abre Visual Studio Code.
+3. Selecciona Archivo > Abrir carpeta y elige Portafolio_Jackeline_Vivanco.
+4. Si no tienes Live Server, instálalo desde Extensiones (autor: Ritwick Dey).
+5. Haz clic derecho sobre index.html > Open with Live Server.
+6. El portafolio se abrirá en el navegador.
+
+No necesitas npm, Node.js ni instalar dependencias del proyecto.
+Mantén index.html, styles.css, app.js, learning.js, assets y demos juntos.
+El botón de sol/luna cambia el tema claro y oscuro.
+Las tarjetas del cuaderno abren Teoría, Laboratorio y Reflexión.
+Los PDF y capturas están incluidos y usan rutas locales.
+La práctica del sorteo se abre desde Semana 3 > Laboratorio.
+El contenido local se puede consultar sin internet una vez iniciado Live Server.
+Los enlaces a GitHub, LinkedIn y documentación externa sí requieren internet.
+
+CONTENIDO DE ESTA ENTREGA
+Se conserva el diseño y todo el contenido de la versión del portafolio preparada en esta conversación.
+Semana 1: fundamentos, página personal, informe y reflexión.
+Semana 2: HTML/CSS y caso MediSalud con informe.
+Semana 3: Bootstrap/Tailwind, NovaSmart, informes, capturas y sorteo de equipos.
+Semana 4: JavaScript, simulador de epidemias, cuatro capturas e informe.
+Semana 5: React, SaludMetrics, informe y evidencias seleccionadas.
+Semana 6: teoría y reflexión; la entrega de laboratorio aún está pendiente de incorporar.
+Se mantienen las notas de revisión y los pendientes existentes para no inventar entregas.
+
+EDICIÓN
+index.html: portada, Sobre mí, secciones, contacto y estructura.
+styles.css: diseño, estilos adaptables y temas claro/oscuro.
+app.js: proyectos, tarjetas, navegación y apertura del cuaderno.
+learning.js: teoría ampliada, reflexiones y laboratorios con evidencias.
+assets/: informes, fotografías y capturas.
+demos/: práctica del sorteo de equipos.
+
+ANTES DE PRESENTAR
+Abre cada semana, comprueba los PDF y prueba ambos temas en tu computadora.
+Revisa las reflexiones señaladas como borrador y confirma que describen tu experiencia.
+La Semana 6 todavía requiere sus evidencias para considerar completa esa entrega.
