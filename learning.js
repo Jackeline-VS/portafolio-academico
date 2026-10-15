@@ -26,39 +26,125 @@ weeks[4].labHtml = "<section class=\"lesson-block\"><p class=\"eyebrow\">PRÁCTI
 weeks[4].reflectionHtml = weeks[4].reflectionHtml.replace(/<div class="notice">[\s\S]*?<\/div>/, '<div class="notice">El informe documenta las demostraciones de componentes, props, children, estilos y CSR. Reflexión adaptada para revisión personal.</div>');
 
 // Semana 7: Uso de hooks y hooks personalizados (TechStore).
-weeks[6].theory = `<section class="lesson-block"><h3>¿Qué es un hook?</h3><p>Un hook es una función de React que permite a un componente funcional usar estado, efectos, contexto y otras capacidades. Su nombre empieza con <code>use</code>. Se llaman siempre en el nivel superior del componente y en el mismo orden en cada render: nunca dentro de condicionales, bucles o funciones anidadas.</p></section>
-<section class="lesson-block"><h3>Hooks principales</h3><div class="theory-table"><table><thead><tr><th>Hook</th><th>Para qué sirve</th></tr></thead><tbody><tr><td><code>useState</code></td><td>Guarda un valor que, al cambiar, vuelve a renderizar el componente.</td></tr><tr><td><code>useEffect</code></td><td>Ejecuta efectos después del render, como solicitar datos o modificar el documento. Puede devolver una función de limpieza.</td></tr><tr><td><code>useContext</code></td><td>Lee un valor compartido por un Provider sin pasarlo por props en cada nivel (evita el <i>prop drilling</i>).</td></tr><tr><td><code>useRef</code></td><td>Guarda una referencia mutable, por ejemplo a un input, sin provocar un nuevo render.</td></tr><tr><td><code>useReducer</code></td><td>Organiza un estado complejo mediante acciones y una función reductora.</td></tr><tr><td><code>useMemo</code></td><td>Memoriza el resultado de un cálculo y solo lo repite si cambian sus dependencias.</td></tr><tr><td><code>useCallback</code></td><td>Memoriza una función para que conserve la misma referencia entre renders.</td></tr></tbody></table></div></section>
-<section class="lesson-block"><h3>Ciclo de un efecto</h3><div class="concept-flow"><span>Render</span><span>Efecto</span><span>Cambia la dependencia</span><span>Limpieza y nuevo efecto</span></div><pre><code>useEffect(() =&gt; {
-  const controller = new AbortController()
-  fetch(url, { signal: controller.signal })
-  return () =&gt; controller.abort() // limpieza
-}, [url])</code></pre><p>El arreglo de dependencias indica cuándo debe repetirse el efecto. La limpieza cancela trabajo pendiente si el componente se desmonta o si la dependencia cambia.</p></section>
-<section class="lesson-block"><h3>Contexto: datos globales</h3><p>Un contexto se crea con <code>createContext</code>, se ofrece con un Provider y se lee con <code>useContext</code>. Es útil para datos que muchos componentes necesitan, como el tema visual o el carrito de compras.</p></section>
-<section class="lesson-block"><h3>Rendimiento: memo, useMemo y useCallback</h3><p><code>memo</code> evita que un componente se vuelva a renderizar si sus props no cambiaron. <code>useCallback</code> mantiene estables las funciones que se pasan como props, y <code>useMemo</code> evita repetir cálculos costosos como filtrar una lista. Conviene usarlos donde hay un beneficio real y no en todos los componentes.</p></section>
-<section class="lesson-block"><h3>Hooks personalizados</h3><p>Un hook personalizado es una función propia que empieza con <code>use</code> y combina otros hooks. Permite extraer lógica repetida, como solicitar datos o manejar un formulario, y reutilizarla en varios componentes. Cada componente que lo usa tiene su propio estado.</p><pre><code>function useFetch(url) {
-  const [data, setData] = useState(null)
-  const [cargando, setCargando] = useState(true)
-  const [error, setError] = useState(null)
-  // useEffect con fetch + AbortController
-  return { data, cargando, error }
-}</code></pre></section>
-<section class="lesson-block"><h3>StrictMode, Profiler y batching</h3><p><code>StrictMode</code> ayuda a detectar problemas durante el desarrollo; por ejemplo, ejecuta los efectos dos veces para comprobar que su limpieza es correcta. El Profiler de React DevTools muestra cuántas veces se renderiza cada componente. Con el <i>batching</i>, varias actualizaciones de estado dentro de un mismo evento producen un solo render.</p></section>`;
+const fig7 = (n, texto) => `<figure class="practice-evidence"><a href="assets/semana07-fig${n}.png" target="_blank"><img src="assets/semana07-fig${n}.png" alt="${texto}" loading="lazy"></a><figcaption><b>Figura ${Number(n)}.</b> ${texto}</figcaption></figure>`;
 
-weeks[6].labHtml = `<section class="lesson-block"><p class="eyebrow">PRÁCTICA SEMANA 07 · LABORATORIO 06: USO DE HOOKS</p><h3>TechStore · Tienda de tecnología con React Hooks</h3><p>Aplicación con Vite y React que presenta un catálogo de laptops, smartphones, tablets y accesorios obtenido de la API pública DummyJSON. Incluye búsqueda, filtros por categoría, carrito de compras, checkout con validación, cambio de tema y un laboratorio de render.</p><div class="lesson-tags"><code>React 19</code><code>Vite</code><code>Context API</code><code>DummyJSON</code></div></section>
-<figure class="practice-evidence"><a href="assets/semana07-techstore-catalogo.png" target="_blank"><img src="assets/semana07-techstore-catalogo.png" alt="Catálogo de TechStore con buscador, filtros por categoría y tarjetas de productos" loading="lazy"></a><figcaption>Catálogo de TechStore: buscador, filtros por categoría y 38 productos cargados desde la API.</figcaption></figure>
-<section class="lesson-block"><h3>Desarrollo paso a paso</h3><p>Cada paso del laboratorio quedó registrado como un commit en el repositorio.</p><div class="theory-table"><table><thead><tr><th>Paso</th><th>Qué se implementó</th></tr></thead><tbody><tr><td>0</td><td>Proyecto base con Vite y React.</td></tr><tr><td>1</td><td>Diseño base de TechStore, <code>StrictMode</code> y observación con el Profiler (laboratorio de render y batching).</td></tr><tr><td>2</td><td>Carga de productos con <code>fetch</code>, <code>async/await</code> y <code>AbortController</code> para cancelar la solicitud.</td></tr><tr><td>3</td><td><code>ThemeContext</code> y <code>CartContext</code> leídos con <code>useContext</code> desde la barra de navegación, el catálogo y el carrito.</td></tr><tr><td>4</td><td><code>useMemo</code> para el filtro de productos, <code>useCallback</code> en las acciones del carrito, <code>memo</code> en <code>ProductCard</code> y <code>useRef</code> para enfocar el buscador.</td></tr><tr><td>5</td><td>Hooks personalizados <code>useFetch</code> (datos, carga y error) y <code>useForm</code> (valores, validación y reinicio del formulario).</td></tr></tbody></table></div></section>
-<section class="lesson-block"><h3>Organización del proyecto</h3><div class="concept-flow"><span>components/<br>Navbar · ProductCard</span><span>pages/<br>Catálogo · Carrito · Checkout · Lab</span><span>context/<br>Theme · Cart</span><span>hooks/<br>useFetch · useForm</span></div></section>
-<section class="lesson-block"><h3>Código relevante: carrito con useCallback</h3><pre><code>const agregar = useCallback((producto) =&gt; {
-  setItems((prev) =&gt; {
-    const existe = prev.find((i) =&gt; i.id === producto.id)
-    if (existe) {
-      return prev.map((i) =&gt; i.id === producto.id
-        ? { ...i, cantidad: i.cantidad + 1 } : i)
-    }
-    return [...prev, { ...producto, cantidad: 1 }]
-  })
-}, [])</code></pre><p>La función conserva su referencia entre renders; por eso <code>ProductCard</code>, envuelto en <code>memo</code>, no se vuelve a renderizar sin necesidad.</p></section>
-<section class="lesson-block"><h3>Código relevante: useForm en el checkout</h3><pre><code>const { valores, errores, handleChange, handleSubmit, reset } =
-  useForm({ nombre: '', email: '', direccion: '' }, validar)</code></pre><p>El formulario valida el nombre, el formato del correo y la longitud de la dirección antes de confirmar el pedido. El <code>return</code> condicional se ubica después de todos los hooks para respetar sus reglas.</p></section>
-<a class="lesson-repo" target="_blank" rel="noopener" href="https://github.com/Jackeline-VS/techstore-react-hooks">Consultar el código en GitHub ↗</a>
-<h3>Evidencias por incorporar</h3><div class="notice">Añadir capturas del carrito, del checkout con validación y del Profiler mostrando el batching.</div>`;
+weeks[6].theory = `<div class="hooks-theory">
+<section class="lesson-block"><h3>Hooks de React</h3><p>Los Hooks son funciones especiales que permiten usar estado y otras características de React en componentes funcionales. Solo pueden llamarse al nivel raíz del componente, nunca dentro de condicionales o bucles.</p>
+<p class="diagram-label">Diagrama · Resumen de Hooks</p><div class="hook-grid"><div><code>useState</code><span>Estado local del componente</span></div><div><code>useEffect</code><span>Efectos secundarios y ciclo de vida</span></div><div><code>useContext</code><span>Consumir un contexto global</span></div><div><code>useRef</code><span>Referencia DOM o valor persistente sin render</span></div><div><code>useReducer</code><span>Estado complejo con múltiples acciones</span></div><div><code>useCallback</code><span>Memorizar función entre renders</span></div><div><code>useMemo</code><span>Memorizar cálculo costoso entre renders</span></div></div></section>
+
+<section class="lesson-block"><h3>useState</h3><p>Agrega estado local a un componente. Devuelve un par: el valor actual y una función para actualizarlo. Cada llamada a la función de actualización dispara un re-render.</p>
+<p class="diagram-label">Diagrama · useState — Ciclo de estado</p><div class="hook-flow"><span>estado inicial</span><i>→</i><span>setState(nuevoValor)</span><i>→</i><span>re-render</span><i>→</i><span>UI actualizada</span></div>
+<pre><code>const [count, setCount] = useState(0)
+const [user, setUser] = useState(null)
+const [list, setList] = useState([])
+
+// Actualizar basado en valor anterior (seguro)
+setCount((prev) =&gt; prev + 1)
+
+// Actualizar objeto parcialmente
+setUser((prev) =&gt; ({ ...prev, name: "Ana" }))</code></pre>
+<div class="notice"><b>Regla importante.</b> Nunca mutar el estado directamente. Siempre pasar un nuevo valor u objeto para que React detecte el cambio y re-renderice.</div></section>
+
+<section class="lesson-block"><h3>useEffect</h3><p>Ejecuta efectos secundarios después del render: peticiones a APIs, suscripciones, manipulación del DOM. El array de dependencias controla cuándo se ejecuta.</p>
+<p class="diagram-label">Diagrama · useEffect</p><div class="hook-cards">
+<div><b>Sin array</b><span>Se ejecuta en cada render</span><pre><code>useEffect(() =&gt; { ... })</code></pre></div>
+<div><b>Array vacío []</b><span>Solo al montar (componentDidMount)</span><pre><code>useEffect(() =&gt; { ... }, [])</code></pre></div>
+<div><b>[dep1, dep2]</b><span>Al montar y cuando cambia la dependencia</span><pre><code>useEffect(() =&gt; { ... }, [userId])</code></pre></div>
+<div><b>Con cleanup</b><span>Limpia al desmontar o antes del siguiente efecto</span><pre><code>useEffect(() =&gt; {
+  const id = setInterval(fn, 1000)
+  return () =&gt; clearInterval(id)
+}, [])</code></pre></div></div></section>
+
+<section class="lesson-block"><h3>useContext</h3><p>Permite consumir un contexto sin necesidad de pasar props manualmente por cada nivel del árbol de componentes.</p>
+<p class="diagram-label">Diagrama · useContext — evitar prop drilling</p><div class="hook-cards two">
+<div><b>Sin Context — prop drilling</b><pre><code>App (theme)
+  └ Layout (theme)
+    └ Sidebar (theme)
+      └ Button (theme)
+        ↑ pasada manualmente
+          en cada nivel</code></pre></div>
+<div><b>Con Context — directo</b><pre><code>App
+  └ ThemeProvider
+    └ Layout
+      └ Sidebar
+        └ Button
+          ← useContext(ThemeCtx)
+            accede directo</code></pre></div></div>
+<pre><code>// 1. Crear contexto
+const ThemeCtx = createContext("dark")
+
+// 2. Proveer valor
+&lt;ThemeCtx.Provider value={theme}&gt;
+  &lt;App /&gt;
+&lt;/ThemeCtx.Provider&gt;
+
+// 3. Consumir en cualquier hijo
+const theme = useContext(ThemeCtx)</code></pre></section>
+
+<section class="lesson-block"><h3>useRef</h3><p>Crea una referencia mutable que persiste entre renders. Se usa para acceder directamente al DOM o para guardar valores sin provocar re-renders.</p>
+<p class="diagram-label">Diagrama · useRef</p><div class="hook-cards two">
+<div><b>Referencia al DOM</b><pre><code>const inputRef = useRef()
+&lt;input ref={inputRef} /&gt;
+inputRef.current.focus()</code></pre></div>
+<div><b>Valor persistente sin re-render</b><pre><code>const countRef = useRef(0)
+// Cambiar .current no dispara render
+countRef.current++</code></pre></div></div>
+<div class="notice"><b>useRef vs useState.</b> Ambos persisten valores entre renders. La diferencia: cambiar <code>ref.current</code> no provoca re-render, cambiar estado sí.</div></section>
+
+<section class="lesson-block"><h3>useReducer</h3><p>Alternativa a useState para estados complejos. Centraliza las transiciones de estado en una función reductora pura.</p>
+<p class="diagram-label">Diagrama · useReducer</p><div class="hook-flow"><span><b>Componente</b><br>dispatch(action)</span><i>→</i><span><b>Reducer</b><br>(state, action) =&gt; newState</span><i>→</i><span><b>Nuevo estado</b><br>re-render</span></div>
+<pre><code>function reducer(state, action) {
+  switch (action.type) {
+    case "increment": return { count: state.count + 1 }
+    case "decrement": return { count: state.count - 1 }
+    case "reset":     return { count: 0 }
+    default: return state
+  }
+}
+
+const [state, dispatch] = useReducer(reducer, { count: 0 })
+dispatch({ type: "increment" })</code></pre>
+<div class="notice">Preferir useReducer sobre useState cuando el estado tiene múltiples sub-valores o las transiciones son complejas.</div></section>
+
+<section class="lesson-block"><h3>useCallback y useMemo</h3><p>Hooks de optimización. Evitan recálculos o recreaciones innecesarias entre renders memoizando funciones y valores.</p>
+<p class="diagram-label">Diagrama · useCallback y useMemo — Optimización</p><div class="hook-cards two">
+<div><b>useCallback</b><span>Memoriza una función. Solo se recrea si cambian sus dependencias.</span><pre><code>const handleClick = useCallback(() =&gt; {
+  doSomething(id)
+}, [id])
+// útil al pasar callbacks a hijos memoizados</code></pre></div>
+<div><b>useMemo</b><span>Memoriza el resultado de un cálculo costoso.</span><pre><code>const sorted = useMemo(() =&gt;
+  [...items].sort((a, b) =&gt; a.price - b.price)
+, [items])
+// no recalcula si items no cambió</code></pre></div></div>
+<div class="notice"><b>¿Cuándo usarlos?</b> Solo cuando hay un problema de rendimiento medible. Aplicarlos en exceso añade complejidad innecesaria.</div></section>
+</div>`;
+
+weeks[6].labHtml = `<div class="week7-lab">
+<section class="lesson-block"><p class="eyebrow">PRÁCTICA SEMANA 07 · INFORME</p><h3>TechStore — SPA de tienda de tecnología</h3><p>Aplicación con Vite y React que consume la API pública DummyJSON para mostrar laptops, smartphones, tablets y accesorios. Incluye búsqueda, filtros por categoría, carrito, checkout con validación, cambio de tema y un laboratorio de render. La práctica se desarrolló en cinco pasos, cada uno registrado como commit en el repositorio.</p><div class="actions"><a class="lesson-repo" href="assets/semana07-techstore-informe.pdf" target="_blank">Ver informe completo (PDF) ↗</a><a class="lesson-repo" target="_blank" rel="noopener" href="https://github.com/Jackeline-VS/techstore-react-hooks">Consultar el código en GitHub ↗</a></div></section>
+
+<section class="lesson-block"><h3>Paso 1: Ciclo de render, StrictMode y Profiler</h3><p>Se envolvió la aplicación en <code>&lt;StrictMode&gt;</code> en main.jsx. Se creó la vista Lab con un contador que ejecuta tres setState en un mismo clic y un componente hijo que recibe una prop fija. El análisis se hizo con el Profiler y no con console.log, ya que StrictMode ejecuta dos veces los componentes en desarrollo y los logs no reflejan el rendimiento real.</p>
+${fig7('01', 'main.jsx: la app está envuelta en StrictMode y en los Providers de contexto.')}
+${fig7('02', 'RenderLab.jsx: tres actualizaciones de estado dentro del mismo evento (batching).')}
+${fig7('03', 'Profiler: un solo commit (1/1) a pesar de los tres setState. Navbar no se re-renderiza (gris).')}
+${fig7('04', 'Profiler: RenderLab se renderiza por "Hook 1 changed" (useState) e Hijo porque su padre se renderizó.')}
+<div class="notice"><b>Conclusión.</b> React agrupa las actualizaciones de un mismo evento (batching). Un componente se re-renderiza cuando cambia su estado, cuando se renderiza su padre o cuando cambia un contexto que consume.</div></section>
+
+<section class="lesson-block"><h3>Paso 2: useEffect con async/await y AbortController</h3><p>Se migró la petición fetch de .then() a async/await dentro de useEffect. Como useEffect no puede ser async, se define una función async interna. Se añadió un AbortController y la función de limpieza <code>return () =&gt; controller.abort()</code>, que cancela la petición si el componente se desmonta y evita memory leaks.</p><p><b>¿Por qué [ ] no significa "se ejecuta una vez"?</b> El array vacío indica que el efecto no depende de valores reactivos. En desarrollo, StrictMode monta, desmonta y vuelve a montar el componente para comprobar que la limpieza funciona; por eso el efecto se ejecuta dos veces y la primera petición queda cancelada.</p>
+${fig7('05', 'Catálogo cargado con productos reales de la API, filtrado por la categoría Smartphones.')}
+${fig7('06', 'Catálogo completo (38 productos) con tarjetas de imagen, categoría, rating y precio.')}</section>
+
+<section class="lesson-block"><h3>Paso 3: useContext (tema y carrito)</h3><p>Se crearon dos contextos separados por dominio, como recomienda la guía: ThemeContext (tema claro/oscuro) y CartContext (productos del carrito). Ambos se proveen en main.jsx y se consumen con los hooks useTheme() y useCart() desde Navbar, ProductCard, Carrito y Checkout, sin prop drilling.</p>
+${fig7('07', 'ThemeContext.jsx: Provider con useState y useEffect que aplica data-theme al documento.')}
+${fig7('08', 'Tienda en tema claro, cambiado desde el botón del Navbar mediante useContext.')}
+${fig7('09', 'Carrito compartido por contexto: el contador del Navbar y el total se actualizan en toda la app.')}</section>
+
+<section class="lesson-block"><h3>Paso 4: useMemo, useCallback, React.memo y useRef</h3><ul><li><b>useMemo:</b> el filtro de productos (búsqueda + categoría) solo se recalcula cuando cambian productos, busqueda o categoria.</li><li><b>useCallback:</b> las funciones agregar, quitar y vaciar de CartContext mantienen la misma referencia entre renders.</li><li><b>React.memo:</b> ProductCard no se re-renderiza si sus props no cambian.</li><li><b>useRef:</b> da foco automático al buscador y al campo Nombre del Checkout sin provocar re-renders.</li></ul>
+${fig7('10', 'Catalogo.jsx: useRef para el foco y useMemo para el filtro de productos.')}</section>
+
+<section class="lesson-block"><h3>Paso 5: Hooks personalizados useFetch y useForm</h3><p>Se extrajo la lógica repetitiva a hooks propios. useFetch encapsula la petición, los estados data/cargando/error y la limpieza con AbortController, y se reutiliza en el Catálogo. useForm maneja valores, cambios, validación y reset del formulario de Checkout. Se respetaron las reglas de Hooks: no se llaman dentro de loops, condiciones ni funciones anidadas, y el return condicional del Checkout va después de todos los hooks.</p>
+${fig7('11', 'useForm.js: hook personalizado para valores, errores, handleChange, handleSubmit y reset.')}
+${fig7('12', 'Checkout: pedido confirmado tras validar el formulario con useForm; el carrito se vacía.')}</section>
+</div>`;
+
+weeks[6].reflectionHtml = `<h3>¿Qué aprendí?</h3><p>Esta semana fue de las más densas del curso, pero también de las más útiles. Entender cuándo usar cada hook cambia completamente la calidad del código. La diferencia entre useCallback y useMemo no era clara al principio, pero con los ejemplos quedó claro que uno memoriza funciones y el otro valores calculados.</p><h3>¿Cómo lo aprendí?</h3><p>Crear un custom hook propio en el laboratorio fue la mejor forma de fijar el concepto. Ver cómo se puede extraer toda la lógica de fetching en un solo useFetch reutilizable me mostró el valor real de los hooks más allá de los que ya vienen en React.</p>`;
+weeks[6].reflectionConfirmed = true;

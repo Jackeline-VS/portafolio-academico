@@ -141,3 +141,23 @@ html[data-theme=light] #theme{background:#e8edf6;color:#0b1a33;border-color:var(
 .store-grid b{font-size:9px;color:#1d3f7a}
 @media(max-width:430px){.store-grid{grid-template-columns:repeat(2,1fr)}}
 .project:not(:first-child) .dashboard-visual .dash-title{font-size:13px;margin-bottom:8px}.project:not(:first-child) .dashboard-visual .dash-metrics b{font-size:14px}.project:not(:first-child) .dashboard-visual .chart-bars{height:42px}.project:not(:first-child) .dashboard-visual .dash-side{gap:12px}
+
+/* Semana 7: diagramas de hooks y figuras del informe */
+.diagram-label{font-family:var(--mono);font-size:10px!important;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)!important;margin:22px 0 10px}
+.hook-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.hook-grid>div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px}
+.hook-grid code{display:block;font-size:13px!important;margin-bottom:6px}
+.hook-grid span{font-size:12px;color:var(--muted)}
+.hook-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 18px}
+.hook-flow span{flex:1;min-width:120px;text-align:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 10px;font-size:12px;color:var(--gold);font-family:var(--mono)}
+.hook-flow span b{color:var(--ink);font-family:var(--sans)}
+.hook-flow i{font-style:normal;color:var(--cyan)}
+.hook-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.hook-cards>div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.hook-cards b{display:block;color:var(--ink);font-size:14px}
+.hook-cards span{display:block;font-size:12px;color:var(--muted);margin:4px 0 10px}
+.hook-cards pre{margin:0;background:var(--panel)!important;overflow-x:auto;white-space:pre!important}
+.hooks-theory pre{white-space:pre;overflow-x:auto}
+.week7-lab .practice-evidence img{max-width:100%}
+.week7-lab .actions{gap:20px;margin:16px 0 0}
+@media(max-width:600px){.hook-cards{grid-template-columns:1fr}.hook-flow i{display:none}}
