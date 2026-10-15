@@ -50,3 +50,76 @@ html[data-theme=light] #theme{background:#f4ddeb;color:#6d174a;border-color:#b98
 .evidence-actions a{color:var(--gold);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 .evidence-image:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
 @media(max-width:600px){.evidence-step figcaption{padding:16px;gap:12px}.evidence-actions{padding:14px 16px}.evidence-actions span{flex-basis:100%}}
+
+/* Azul noche con acento champán · tipografía Space Grotesk, Inter, Instrument Serif y JetBrains Mono */
+:root{--bg:#060b17;--panel:#0b1324;--panel2:#111d35;--ink:#edf1f8;--muted:#98a6bf;--line:#1d2b47;--gold:#d8b46a;--goldink:#0a1020;--cyan:#7cc4e4;--glow:#1e3a74;--sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--display:'Space Grotesk','Inter',system-ui,'Segoe UI',Arial,sans-serif;--serif:'Instrument Serif',Georgia,'Times New Roman',serif;--mono:'JetBrains Mono',ui-monospace,Consolas,'Courier New',monospace}
+html[data-theme=light]{--bg:#f5f7fb;--panel:#ffffff;--panel2:#e8edf6;--ink:#0b1a33;--muted:#4c5a72;--line:#cdd6e5;--gold:#8a6418;--goldink:#ffffff;--cyan:#1f6f99;--glow:#c9d8f2}
+
+/* Tipografía */
+body{font-family:var(--sans);font-feature-settings:'cv11','ss01';-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 60% 45% at 85% 0%,#1e3a7433,transparent 70%),radial-gradient(ellipse 50% 40% at 0% 100%,#0f254f40,transparent 70%);background-attachment:fixed}
+html[data-theme=light] body{background-image:radial-gradient(ellipse 60% 45% at 85% 0%,#c9d8f280,transparent 70%)}
+h1,h2,h3,.brand,.project-copy h3,.week h3,.portrait-label strong,.lead{font-family:var(--display);font-style:normal}
+h1{font-weight:600;letter-spacing:-.035em}
+h2{font-weight:500;letter-spacing:-.03em}
+h3,.week h3,.project-copy h3{font-weight:500;letter-spacing:-.01em}
+em,h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--gold)}
+h1 em{font-size:1.08em}
+.eyebrow,.role,.project-label,.project-index,.ticker,.term,.week-number,.week-bottom,.hero-info,.hero-note,.frame-tag,.photo-caption,.visual-caption,.notebook-footer,.design-values span,.portrait-label span,.evidence-number,.reflection-label,.brand small{font-family:var(--mono);font-style:normal}
+.eyebrow{font-weight:500;letter-spacing:.18em}
+.week-number{font-weight:400;color:var(--cyan)}
+.ticker span,.dot{color:var(--cyan)}
+.dot{background:var(--cyan);box-shadow:0 0 0 4px #7cc4e422}
+dialog code,.lesson-tags code,pre code{font-family:var(--mono)}
+
+/* Botones y detalles */
+.primary,.frame-tag{background:var(--gold);color:var(--goldink);box-shadow:0 6px 24px #d8b46a26}
+.primary:hover{background:#e6c784;filter:none}
+html[data-theme=light] .primary,html[data-theme=light] .frame-tag{background:#0b1a33;color:#fff;box-shadow:0 6px 20px #0b1a3326}
+html[data-theme=light] .primary:hover{background:#17305c;color:#fff}
+.portrait img{filter:saturate(.8) contrast(1.03)}
+.portrait-label{background:linear-gradient(transparent,#060b17f0)}
+.portrait-label span{color:var(--gold)}
+html[data-theme=light] .portrait-label span{color:#e3c47f}
+.tags span{border-color:var(--line);background:#111d3566}
+#theme{background:var(--panel2);color:var(--gold);border-color:var(--line)}
+header{background:#060b17d9;backdrop-filter:blur(12px)}
+html[data-theme=light] header{background:#f5f7fbd9}
+dialog::backdrop{background:#030712cc}
+
+/* Proyectos e ilustraciones */
+.project-art,.project:nth-child(2) .project-art,.project:nth-child(3) .project-art,.project:nth-child(4) .project-art{background:linear-gradient(140deg,#13244a,#0a1328);border-color:var(--line)}
+.visual{background:#f7f9fd;color:#0b1a33}
+.visual-top{border-color:#d8e0ec}.visual-top span{color:#5b6b85}.visual-top b span{color:#b08636}
+.dash-side{border-color:#d8e0ec}.dash-side i{background:#1d3f7a}
+.dash-metrics>div{background:#edf2f9;border-color:#d8e0ec}.dash-metrics small{color:#5b6b85}
+.dash-chart{border-color:#d8e0ec}.chart-bars{border-color:#cdd6e5;background:repeating-linear-gradient(to top,transparent 0 22px,#e6ecf5 22px 23px)}
+.chart-bars i{background:#1d3f7a}.chart-bars i:nth-child(2n){background:#d8b46a}
+.shop-visual{background:#f2f4f8}.shop-products>div{background:#e1e7f0}.shop-products i,.shop-products>div:nth-child(2) i,.shop-products>div:nth-child(3) i{background:#2c4a80}.shop-products>div:nth-child(2) i{background:#b08636}
+.epi-visual{background:#eef4f8}.epi-cross{color:#1f6f99}.epi-body small{color:#4c6a80}.epi-lines i{background:#b9cfdd}
+.cards-stack>div{background:#c9d6ec}.cards-stack>div:nth-child(2){background:#e8d6ad}.cards-stack>div:nth-child(3){background:#dde5f2}
+.visual-caption,html[data-theme=light] .visual-caption{color:#9fb0cc}
+.mini{background:#eef2f9}.mini-box{background:#9fb4d8}.mini-box:nth-child(2){background:#d8b46a}.mini-box:nth-child(3){background:#c9d6ec}.mini-bars i{background:#1d3f7a}
+
+/* Cuaderno */
+.notebook{background:var(--panel);background-image:radial-gradient(ellipse 50% 60% at 0% 100%,#1e3a7426,transparent 70%)}
+.week{background:var(--bg)}
+.week:hover{border-color:var(--gold);background:var(--panel2);box-shadow:0 14px 34px #0006}
+.week-bottom>span:last-child{color:var(--gold)}
+.contact:after{color:var(--panel2)}
+
+/* Ajustes del tema claro (reemplazan los acentos fucsia anteriores) */
+html[data-theme=light] .eyebrow,html[data-theme=light] .project-label,html[data-theme=light] .lesson-tabs button[aria-selected=true]{color:var(--gold)}
+html[data-theme=light] .week-number{color:var(--cyan)}
+html[data-theme=light] .week{background:#fff;border-color:var(--line);box-shadow:0 3px 12px #0b1a330a}
+html[data-theme=light] .week:hover{background:#eef2f9;border-color:var(--gold);box-shadow:0 10px 26px #0b1a3318}
+html[data-theme=light] .notebook{background:#edf1f8;background-image:none;border-color:var(--line)}
+html[data-theme=light] .tags span{background:#fff;color:#2a3a57;border-color:var(--line)}
+html[data-theme=light] .lesson-tabs button[aria-selected=true]{background:#e8edf6;border-bottom-color:var(--gold)}
+html[data-theme=light] .notice{background:#eef2f9;color:#22324d;border-left-color:var(--gold)}
+html[data-theme=light] .term strong,html[data-theme=light] .lead{color:var(--ink)}
+html[data-theme=light] .secondary,html[data-theme=light] .sources a,html[data-theme=light] .project-copy a{color:#16305e}
+html[data-theme=light] .theory-table th{background:#e3e9f3;color:#0b1a33}
+html[data-theme=light] .theory-table td{color:#3a4860}
+html[data-theme=light] .lesson-tags code,html[data-theme=light] .flex-demo span,html[data-theme=light] .grid-demo span{color:#8a6418;background:#f1f4f9;border-color:var(--line)}
+html[data-theme=light] .project-art{border-color:#1d2b47}
+html[data-theme=light] #theme{background:#e8edf6;color:#0b1a33;border-color:var(--line)}
