@@ -26,6 +26,7 @@ Semana 3: Bootstrap/Tailwind, NovaSmart, informes, capturas y sorteo de equipos.
 Semana 4: JavaScript, simulador de epidemias, cuatro capturas e informe.
 Semana 5: React, SaludMetrics, informe y evidencias seleccionadas.
 Semana 6: teoría y reflexión; la entrega de laboratorio aún está pendiente de incorporar.
+Semana 7: hooks y hooks personalizados con TechStore (código en GitHub y captura del catálogo).
 Se mantienen las notas de revisión y los pendientes existentes para no inventar entregas.
 
 EDICIÓN

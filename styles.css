@@ -123,3 +123,21 @@ html[data-theme=light] .theory-table td{color:#3a4860}
 html[data-theme=light] .lesson-tags code,html[data-theme=light] .flex-demo span,html[data-theme=light] .grid-demo span{color:#8a6418;background:#f1f4f9;border-color:var(--line)}
 html[data-theme=light] .project-art{border-color:#1d2b47}
 html[data-theme=light] #theme{background:#e8edf6;color:#0b1a33;border-color:var(--line)}
+
+/* Ilustración TechStore (Semana 7) */
+.store-visual{transform:perspective(1100px) rotateY(-8deg) rotateX(3deg)}
+.visual-top b span{color:#b08636}
+.store-hero{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:-.02em;text-align:center;padding:14px 0 10px}
+.store-hero span{color:#2c5fb8}
+.store-search{margin:0 auto 9px;max-width:70%;border:1px solid #c9d4e6;border-radius:20px;padding:5px 12px;font-size:8px;color:#7a879c}
+.store-chips{display:flex;justify-content:center;gap:5px;margin-bottom:12px}
+.store-chips i{font-style:normal;font-size:7px;border:1px solid #d3dbe8;border-radius:10px;padding:2px 8px;color:#5b6b85}
+.store-chips i:first-child{background:#1d3f7a;border-color:#1d3f7a;color:#fff}
+.store-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.store-grid>div{background:#edf2f9;border:1px solid #d8e0ec;border-radius:5px;padding:7px}
+.store-grid i{display:block;height:34px;border-radius:3px;background:linear-gradient(135deg,#c9d6ec,#9fb4d8);margin-bottom:6px}
+.store-grid>div:nth-child(2) i{background:linear-gradient(135deg,#e8d6ad,#d8b46a)}
+.store-grid span{display:block;font-size:7px;color:#5b6b85}
+.store-grid b{font-size:9px;color:#1d3f7a}
+@media(max-width:430px){.store-grid{grid-template-columns:repeat(2,1fr)}}
+.project:not(:first-child) .dashboard-visual .dash-title{font-size:13px;margin-bottom:8px}.project:not(:first-child) .dashboard-visual .dash-metrics b{font-size:14px}.project:not(:first-child) .dashboard-visual .chart-bars{height:42px}.project:not(:first-child) .dashboard-visual .dash-side{gap:12px}
