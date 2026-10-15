@@ -76,3 +76,42 @@ document.querySelectorAll('[data-week]').forEach(button => button.addEventListen
 }));
 document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});dialog.addEventListener('close',()=>lastButton?.focus());
 const theme=document.querySelector('#theme');function setTheme(t){document.documentElement.dataset.theme=t;theme.textContent=t==='dark'?'☀':'☾';theme.setAttribute('aria-label',t==='dark'?'Cambiar a modo claro':'Cambiar a modo oscuro');try{localStorage.setItem('jv-theme',t)}catch{}}let saved;try{saved=localStorage.getItem('jv-theme')}catch{}setTheme(saved==='light'?'light':'dark');theme.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
+
+// Menú activo: marca el apartado según la sección visible al desplazarse
+const navLinks = [...document.querySelectorAll('nav a')];
+const spySections = navLinks.map(link => document.querySelector(link.getAttribute('href')));
+function updateActiveLink() {
+  const line = scrollY + innerHeight * 0.35;
+  let current = spySections[0];
+  spySections.forEach(section => { if (section.offsetTop <= line) current = section; });
+  if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) current = spySections[spySections.length - 1];
+  navLinks.forEach(link => {
+    const active = link.getAttribute('href') === '#' + current.id;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'true'); else link.removeAttribute('aria-current');
+  });
+}
+addEventListener('scroll', updateActiveLink, { passive: true });
+addEventListener('resize', updateActiveLink);
+updateActiveLink();
+
+// Aparición al desplazarse: cada bloque se muestra al entrar en pantalla
+const revealItems = document.querySelectorAll('.hero-copy > *, .portrait, .section-head, .about-grid, .design-values > div, .skills, .project, .notebook-intro, .week, .notebook-footer, .reflection > *, .sources > *, .contact > *');
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.classList.add('reveal-on');
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    el.classList.add('visible');
+    observer.unobserve(el);
+    // Al terminar, se quitan las clases para no interferir con los efectos hover
+    setTimeout(() => el.classList.remove('reveal', 'visible'), 900 + (parseFloat(el.style.transitionDelay) || 0) * 1000);
+  }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealItems.forEach(el => {
+    const siblings = [...el.parentElement.children].filter(child => child.matches('.hero-copy > *, .design-values > div, .project, .week, .sources > *'));
+    const order = siblings.indexOf(el);
+    if (order > 0) el.style.transitionDelay = Math.min(order % 3, 2) * 0.12 + (el.closest('.hero-copy') ? order * 0.06 : 0) + 's';
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+}
